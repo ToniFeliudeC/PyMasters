@@ -1,14 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+
+
 class Challenge(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     code_template = models.TextField()
     test_cases = models.TextField()
-    total_tests = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    difficulty = models.IntegerField(default=1)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

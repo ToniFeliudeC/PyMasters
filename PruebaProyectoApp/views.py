@@ -26,6 +26,7 @@ def reto(request, reto_id):
         return received == expected
     
     def normalize_code(code):
+
         # Elimina los saltos de línea y los espacios en blanco innecesarios al principio y final del código
         code = code.strip()
 
@@ -47,13 +48,19 @@ def reto(request, reto_id):
         script = solucion + '\n' + tests
         normalized_script = normalize_code(script)
 
+        print(script)
+        print(normalized_script)
+
         
         # Ejecutar el script con los tests
-        exec(normalized_script, globals(), locals())
+        try:
+            exec(normalized_script, globals(), locals())
+        except SyntaxError:
+            pass
         totalTests = len(cases)
 
         # Contar los casos correctos
-        correct = len([result for result in cases if result[0] == 'Correct!'])
+        correct = len([case for case in cases if case[0] == 'Correct!'])
 
         if correct == totalTests:
             # Añadimos un registro a la tabla que relaciona usuarios con retos que han superado.
@@ -66,7 +73,7 @@ def reto(request, reto_id):
     return render(request, 'reto.html', {'challenge': challenge})
 
 def retos(request):
-    challenges = Challenge.objects.all()
+    challenges = [challenge for challenge in Challenge.objects.all() if challenge.is_active]
     return render(request, 'retos.html', {'challenges': challenges})
 
 def log_out(request):
@@ -94,22 +101,12 @@ def crea_challenge(request):
         tests = request.POST.get('tests')
         template = request.POST.get('template')
         created_at = datetime.now()
-        total_tests = request.POST.get('total-tests')
 
         current_user = request.user
-
-    #         title = models.CharField(max_length=255)
-    # description = models.TextField()
-    # code_template = models.TextField()
-    # test_cases = models.TextField()
-    # total_tests = models.IntegerField(default=0)
-    # created_at = models.DateTimeField(auto_now_add=True)
-    # creator = models.ForeignKey(User, on_delete=models.CASCADE)
         
         # Crear un nuevo registro en la base de datos
         nuevo_registro = Challenge(
-            title=titulo, description=descripcion, code_template=template, test_cases=tests, created_at=created_at, creator=current_user,
-            total_tests=total_tests
+            title=titulo, description=descripcion, code_template=template, test_cases=tests, created_at=created_at, creator=current_user
             )
         nuevo_registro.save()
         

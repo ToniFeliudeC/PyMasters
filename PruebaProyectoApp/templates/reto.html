@@ -5,7 +5,7 @@
   <h1>{{ challenge.title }}</h1>
   <p>Fecha: {{ challenge.created_at }}</p>
   <h2>Descripción</h2>
-  <md>{{ challenge.description }}</md>
+  <md-block>{{ challenge.description }}</md-block>
 
   <form method="POST">
     {% csrf_token %}
