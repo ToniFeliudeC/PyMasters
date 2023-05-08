@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>{{ challenge.title }}</h1>
+  <p>Fecha: {{ challenge.created_at }}</p>
+  <h2>Descripción</h2>
+  <md>{{ challenge.description }}</md>
+
+  <form method="POST">
+    {% csrf_token %}
+    <div class="editores-codigo">
+      <div id="editor1">
+        <label for="codigo">Your solution!:</label><br>
+        <textarea name="codigo" id="code-editor-template">{{challenge.code_template}}</textarea><br>
+      </div>
+      <div id="editor1"> 
+        <label for="tests">Log:</label><br>
+        <textarea name="tests" id="code-editor-tests"></textarea><br>
+      </div>
+    </div>
+    <button type="submit">Enviar solución</button>
+  </form>
+
+{% endblock %}

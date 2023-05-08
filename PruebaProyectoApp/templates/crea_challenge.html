@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <br>
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" id="nombre">
+    <br>
+    <label for="descripcion">Descripcion:</label>
+    <textarea name="descripcion" id="descripcion"></textarea>
+    <br>
+    <label for="total-tests">Total:</label>
+    <input type="text" name="total-tests" id="total-tests" >
+    <div class="editores-codigo">
+      <div id="editor1">
+        <label for="tests">Tests:</label>
+        <textarea name="tests" id="code-editor-tests"></textarea>
+      </div>
+      <div id="editor2">
+        <label for="template">Template inicial:</label>
+        <textarea name="template" id="code-editor-template"></textarea>
+      </div>
+    </div>
+    <br>
+    <button type="submit">Crear reto</button>
+  </form>
+{% endblock %}
