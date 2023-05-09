@@ -1,0 +1,17 @@
+#instructions-div {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.529);
+    color: white;
+    border-radius: 1%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#instructions-div md-block {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    flex-direction: column;
+}

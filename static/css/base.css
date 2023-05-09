@@ -1,0 +1,21 @@
+.navbar {
+    background-color: #FFA500;
+    color: white;
+}
+.navbar-brand {
+    color: white;
+}
+.CodeMirror {
+    border: 5px solid orange;
+    border-radius: 1%;
+    font-size: 13px;
+}
+.editores-codigo {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+}
+#editor1, #editor2 {
+    width: 100%;
+}

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
     {% comment %} Importamos CodeMirror para hacer los inputs más atractivos {% endcomment %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
@@ -16,13 +19,12 @@
     {% comment %} Highlighting de python {% endcomment %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/dracula.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/python-hint.min.js"></script>
 
-    <style>
+
+    {% comment %} <style>
         .navbar {
             background-color: #FFA500;
             color: white;
@@ -43,7 +45,7 @@
         #editor1, #editor2 {
             width: 100%;
         }
-    </style>
+    </style> {% endcomment %}
 </head>
 <body>
     <header>
@@ -76,7 +78,7 @@
         </nav>
     </header>
     <main role="main" class="container-fluid">
-        {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
     </main>
     <footer>
         <div class="container">
@@ -87,7 +89,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script>
+    <script src="{% static 'js/base.js' %}"></script>
+    {% comment %} <script>
         var editor = CodeMirror.fromTextArea(document.getElementById("code-editor-tests"), {
             mode: "python",
             lineNumbers: true,
@@ -98,6 +101,6 @@
             lineNumbers: true,
             theme: "dracula"
           });
-    </script>
+    </script> {% endcomment %}
 </body>
 </html>

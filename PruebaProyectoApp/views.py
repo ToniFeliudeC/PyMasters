@@ -55,8 +55,9 @@ def reto(request, reto_id):
         # Ejecutar el script con los tests
         try:
             exec(normalized_script, globals(), locals())
-        except SyntaxError:
-            pass
+        except SyntaxError as e:
+            print(e)
+
         totalTests = len(cases)
 
         # Contar los casos correctos
@@ -66,9 +67,9 @@ def reto(request, reto_id):
             # Añadimos un registro a la tabla que relaciona usuarios con retos que han superado.
             nuevo_registro = UserChallenge(user=current_user, challenge=challenge)
             nuevo_registro.save()
-            return render(request, 'retoLogrado.html', {'challenge': challenge, 'cases': cases})
+            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'failed': True})
         else:
-            return render(request, 'retoLogrado.html', {'challenge': challenge, 'cases': cases})
+            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'failed': True})
             
     return render(request, 'reto.html', {'challenge': challenge})
 
@@ -76,9 +77,11 @@ def retos(request):
     challenges = [challenge for challenge in Challenge.objects.all() if challenge.is_active]
     return render(request, 'retos.html', {'challenges': challenges})
 
+
 def log_out(request):
     logout(request)
     return redirect(retos)
+
 
 def log_in(request):
     if request.method == 'POST':

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
   <h1>Retos disponibles:</h1>
 
@@ -16,4 +16,5 @@
   {% empty %}
     <p>No hay retos disponibles.</p>
   {% endfor %}
+  <script src="{% static 'js/retos.js' %}">
 {% endblock %}

@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from PruebaProyectoApp.views import retos, crea_challenge, log_in, reto, log_out
 
+# Para los static
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('', retos, name='retos'),
     path('accounts/login/', log_in, name='login'),
@@ -26,3 +30,6 @@ urlpatterns = [
     path('retos/<int:reto_id>/', reto, name='reto'),
     path('crea_challenges/', crea_challenge, name='crea_challenges')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
