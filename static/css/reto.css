@@ -3,9 +3,10 @@
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.529);
     color: white;
-    border-radius: 1%;
-    width: 80%;
+    border-radius: 1.5%;
+    width:fit-content;
     margin: 0 auto;
+    padding: 2%;
 }
 
 #instructions-div md-block {
@@ -14,4 +15,5 @@
     background-color: rgba(0, 0, 0, 0);
     color: white;
     flex-direction: column;
+    width: min-content;
 }

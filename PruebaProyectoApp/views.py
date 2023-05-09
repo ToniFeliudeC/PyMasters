@@ -62,12 +62,13 @@ def reto(request, reto_id):
 
         # Contar los casos correctos
         correct = len([case for case in cases if case[0] == 'Correct!'])
+        failedTests = totalTests - correct
 
         if correct == totalTests:
             # Añadimos un registro a la tabla que relaciona usuarios con retos que han superado.
             nuevo_registro = UserChallenge(user=current_user, challenge=challenge)
             nuevo_registro.save()
-            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'failed': True})
+            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'failed': True, 'totalTests': totalTests, 'correct': correct, 'failedTests': failedTests})
         else:
             return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'failed': True})
             

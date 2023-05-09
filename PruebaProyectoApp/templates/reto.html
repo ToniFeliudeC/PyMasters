@@ -23,6 +23,8 @@
       <div id="editor2"> 
         <label for="logs">Log:</label><br>
         <textarea name="logs" id="code-editor-logs">
+          
+        Total cases: {{ totalTests }} | Passed: {{ correct }} | Failed: {{ failedTests }}
         {% if failed  %}
         {% for case in cases %}
           {{ case.0 }} Received: {{ case.1 }} Expected: {{ case.2 }}
