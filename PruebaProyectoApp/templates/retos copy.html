@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Retos disponibles:</h1>
+
+  {% for challenge in challenges %}
+    <div class="card">
+      <div class="card-body">
+        <h3>{{ challenge.title }}</h3>
+        <h5>Descripción</h5>
+        <p>{{ challenge.description }}</p>
+        <p>{{ challenge.created_at }}</p>
+        <a href="{% url 'reto' challenge.id %}" class="btn btn-primary">Ver reto</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>No hay retos disponibles.</p>
+  {% endfor %}
+  <script src="{% static 'js/retos.js' %}">
+{% endblock %}

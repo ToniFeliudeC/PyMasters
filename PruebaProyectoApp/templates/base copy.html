@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {% comment %} Importamos CodeMirror para hacer los inputs más atractivos {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+    <link rel="stylesheet" href="https://codemirror.net/5/theme/dracula.css">
+    <link rel="stylesheet" href="https://codemirror.net/5/theme/darcula.css">
+    <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+
+    {% comment %} Highlighting de python {% endcomment %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.js"></script>
+
+
+    {% comment %} <style>
+        .navbar {
+            background-color: #FFA500;
+            color: white;
+        }
+        .navbar-brand {
+            color: white;
+        }
+        .CodeMirror {
+            border: 1px solid black;
+            font-size: 13px;
+        }
+        .editores-codigo {
+            display: flex;
+            justify content: space-around;
+            flex-direction: row;
+            width: 100%;
+        }
+        #editor1, #editor2 {
+            width: 100%;
+        }
+    </style> {% endcomment %}
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Logo</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Log in</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}" >Log out</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'retos' %}">Retos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'crea_challenges' %}">Submit</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main" class="container-fluid">
+    {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <div class="container">
+            <hr>
+            <p>&copy; {{ year }} - PyMasters</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+    {% comment %} <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code-editor-tests"), {
+            mode: "python",
+            lineNumbers: true,
+            theme: "dracula"
+          });
+          var editor = CodeMirror.fromTextArea(document.getElementById("code-editor-template"), {
+            mode: "python",
+            lineNumbers: true,
+            theme: "dracula"
+          });
+    </script> {% endcomment %}
+</body>
+</html>
