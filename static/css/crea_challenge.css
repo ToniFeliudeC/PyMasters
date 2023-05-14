@@ -1,18 +1,16 @@
-.form-challenge-container {
-    width: 100%;
-    height: 100%;
-}
-
+/* Definimos el 'container' principal en el que definiremos la estructura del apartado
+'crea_challenges', contenido dentro del div 'content' definido en base.html */
 .create-challenge-form {
     display: grid;
-    grid-template-columns: 3fr 7fr;
+    grid-template-columns: 5fr 5fr;
     grid-column-gap: 2%;
     grid-row-gap: 2%;
-    grid-template-rows: 5fr 2fr 1fr;
-    height: 100vh;
+    grid-template-rows: 5fr 3fr 1fr;
+    height: 100%;
     width: 70%;
 }
 
+/* Definimos la estructura y el contenido del div que contendrá los inputs que básicos de un nuevo reto. */
 .info-general {
     display: flex;
     flex-direction: column;
@@ -29,10 +27,9 @@
     border: 2px solid orange;
 }
 
-input, textarea {
+input, textarea, select {
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -43,12 +40,14 @@ input, textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 70%;
 }
 
 #descripcion {
     resize: none;
 }
 
+/* En este div almacenaremos el editor de código para introducir las instrucciones en markdown */
 .instrucciones {
     display: flex;
     flex-direction: column;
@@ -66,14 +65,14 @@ input, textarea {
     border: 2px solid orange;
 }
 
-
+/* Definimos propiedades y estilos básicos de los editores de código */
 .CodeMirror {
     width: 100%;
     height: 100%;
     border-radius: 1%;
-    
-  }
+}
 
+/* Preparamos la estructura del div que contendrá el editor de código para introducir el template inicial de un nuevo reto. */
 .template {
     display: flex;
     justify-content: center;
@@ -92,6 +91,7 @@ input, textarea {
     border: 2px solid orange;
 }
 
+/* En este div almacenamos el editor de código encargado de recoger los tests que debe pasar un determinado reto. */
 .tests {
     display: flex;
     justify-content: center;
@@ -110,9 +110,24 @@ input, textarea {
     border: 2px solid orange;
 }
 
+/* Botón para confirmar el envío de un nuevo reto */
 button {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 3;
     grid-row-end: 4;
 }
+
+/* Responsividad */
+@media only screen and (max-width: 600px) {
+    .create-challenge-form {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 70%;
+    }
+    .instrucciones, .template, .tests {
+        height: 500px;
+    }
+    
+  }

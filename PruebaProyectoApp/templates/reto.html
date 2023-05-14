@@ -4,11 +4,12 @@
 
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/reto.css' %}">
+  <script type="module" src="https://md-block.verou.me/md-block.js"></script>
   <h1>{{ challenge.title }}</h1>
   <p>Fecha: {{ challenge.created_at }}</p>
   <h2>Descripción</h2>
   <div id="instructions-div">
-    <md-block id="instructions">{{ challenge.description }}</md-block>
+    <md-block id="instructions">{{ challenge.instructions }}</md-block>
   </div>
   
   

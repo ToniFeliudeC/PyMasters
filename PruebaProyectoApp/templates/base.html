@@ -22,7 +22,7 @@
                     <li><a href="{% url 'login' %}"><img src="{% static 'img/home_24.png' %}" alt="Home">&nbspHOME </a></li>
                     <li><a href="{% url 'retos' %}"><img src="{% static 'img/code_24.png' %}" alt="Challenges">&nbspCHALLENGES </a></li>
                     <li><a href="{% url 'login' %}"><img src="{% static 'img/group_24.png' %}" alt="Users">&nbspUSERS</a></li>
-                    <li><a href="{% url 'crea_challenges' %}"><img src="{% static 'img/add_24.png' %}" alt="Submite">&nbspSUBMIT</a></li>
+                    <li><a href="{% url 'crea_challenges' %}"><img src="{% static 'img/add_24.png' %}" alt="Submit">&nbspSUBMIT</a></li>
                     {% if request.user.is_anonymous %}
                     <li><a href="{% url 'login' %}"><img src="{% static 'img/person_add_24.png' %}" alt="Register">&nbspREGISTER</a></li>
                     {% endif %}

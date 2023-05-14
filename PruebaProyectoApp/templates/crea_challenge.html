@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
   <link rel="stylesheet" href="https://codemirror.net/5/theme/dracula.css">
   <link rel="stylesheet" href="https://codemirror.net/5/theme/darcula.css">
-  <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+
   {% comment %} Highlighting de python {% endcomment %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/dracula.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.css">
@@ -27,11 +27,23 @@
       </div>
       <div class="input-piece">
         <label for="disciplina">Disciplina</label>
-        <input type="text" name="disciplina" id="disciplina" placeholder="Disciplina del reto...">
+        <select name="disciplina">
+          <option value="fundamentals">Fundamentals</option>
+          <option value="algorithms">Algorithms</option>
+          <option value="bug-fixes">Bug Fixes</option>
+          <option value="refactoring">Refactoring</option>
+          <option value="puzzles">Puzzles</option>
+        </select>
       </div>
       <div class="input-piece">
         <label for="dificultad">Dificultad</label>
-        <input type="text" name="dificultad" id="dificultad" placeholder="Dificultad...">
+        <select name="dificultad">
+          <option value="1">Easy</option>
+          <option value="2">Normal</option>
+          <option value="3">Hard</option>
+          <option value="4">Extreme</option>
+          <option value="5">Master</option>
+        </select> 
       </div>
       <div class="input-piece">
         <label for="descripcion">Descripción</label>

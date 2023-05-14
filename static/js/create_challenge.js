@@ -1,5 +1,5 @@
 var editor = CodeMirror.fromTextArea(document.getElementById("code-editor-instructions"), {
-    mode: "python",
+    mode: "md",
     lineNumbers: true,
     theme: "darcula"
   });
