@@ -9,6 +9,7 @@
     <link href="https://fonts.cdnfonts.com/css/blue" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
 </head>
 <body>
     <div class="container">
@@ -18,21 +19,18 @@
                 <p>Python Elite</p>
                 <hr>
                 <div class="nav">
-                    <li><a href="{% url 'login' %}">HOME <i class="fa fa-home"></i></a></li>
-                    <li><a href="{% url 'retos' %}">CHALLENGES <i class="fa fa-home"></i></a></li>
-                    <li><a href="{% url 'login' %}"><img src="{% static 'img/people.png' %}" alt="">&nbspUSERS</a></li>
-                    <li><a href="{% url 'crea_challenges' %}">SUBMIT <i class="fa fa-home"></i></a></li>
-                    <li><a href="{% url 'login' %}">REGISTER <i class="fa fa-home"></i></a></li>
-                    <li><a href="{% url 'login' %}">LOGIN <i class="fa fa-home"></i></a></li>
-                </div>
-                <hr>
-                <div class="nav">
-                  <li><a href="{% url 'login' %}">HOME</a></li>
-                  <li><a href="{% url 'retos' %}">CHALLENGES</a></li>
-                  <li><a href="{% url 'login' %}">USERS</a></li>
-                  <li><a href="{% url 'crea_challenges' %}">SUBMIT</a></li>
-                  <li><a href="{% url 'login' %}">REGISTER</a></li>
-                  <li><a href="{% url 'login' %}">LOGIN</a></li>
+                    <li><a href="{% url 'login' %}"><img src="{% static 'img/home_24.png' %}" alt="Home">&nbspHOME </a></li>
+                    <li><a href="{% url 'retos' %}"><img src="{% static 'img/code_24.png' %}" alt="Challenges">&nbspCHALLENGES </a></li>
+                    <li><a href="{% url 'login' %}"><img src="{% static 'img/group_24.png' %}" alt="Users">&nbspUSERS</a></li>
+                    <li><a href="{% url 'crea_challenges' %}"><img src="{% static 'img/add_24.png' %}" alt="Submite">&nbspSUBMIT</a></li>
+                    {% if request.user.is_anonymous %}
+                    <li><a href="{% url 'login' %}"><img src="{% static 'img/person_add_24.png' %}" alt="Register">&nbspREGISTER</a></li>
+                    {% endif %}
+                    {% if request.user.is_anonymous %}
+                    <li><a href="{% url 'login' %}"><img src="{% static 'img/vpn_key_24.png' %}" alt="Log In">&nbspLOGIN</a></li>
+                    {% else %}
+                    <li><a href="{% url 'logout' %}"><img src="{% static 'img/exit_to_app_24.png' %}" alt="Log Out">&nbspLOG OUT</a></li>
+                    {% endif %}
                 </div>
                 <hr>
             </div>

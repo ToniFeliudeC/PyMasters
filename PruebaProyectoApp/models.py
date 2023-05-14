@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Challenge(models.Model):
     title = models.CharField(max_length=255)
+    instructions = models.TextField()
     description = models.TextField()
     code_template = models.TextField()
     test_cases = models.TextField()

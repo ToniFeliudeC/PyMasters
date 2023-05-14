@@ -101,7 +101,9 @@ def crea_challenge(request):
     if request.method == 'POST':
         # Obtener los datos del formulario enviado por el usuario
         titulo = request.POST.get('nombre')
+        instrucciones = request.POST.get('instrucciones')
         descripcion = request.POST.get('descripcion')
+        dificultad = request.POST.get('dificultad')
         tests = request.POST.get('tests')
         template = request.POST.get('template')
         created_at = datetime.now()
@@ -110,7 +112,14 @@ def crea_challenge(request):
         
         # Crear un nuevo registro en la base de datos
         nuevo_registro = Challenge(
-            title=titulo, description=descripcion, code_template=template, test_cases=tests, created_at=created_at, creator=current_user
+            title=titulo,
+            description=descripcion,
+            code_template=template,
+            test_cases=tests,
+            created_at=created_at,
+            creator=current_user,
+            difficulty=dificultad,
+            instructions=instrucciones
             )
         nuevo_registro.save()
         

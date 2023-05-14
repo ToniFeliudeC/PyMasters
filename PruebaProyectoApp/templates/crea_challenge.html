@@ -1,28 +1,60 @@
 {% extends 'base.html' %}
 {% load static %}
+
+
+
 {% block content %}
   
-  <form method="post" enctype="multipart/form-data">
+  {% comment %} Importamos CodeMirror para hacer los inputs más atractivos {% endcomment %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://codemirror.net/5/theme/dracula.css">
+  <link rel="stylesheet" href="https://codemirror.net/5/theme/darcula.css">
+  <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+  {% comment %} Highlighting de python {% endcomment %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/dracula.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.js"></script>
+
+  <form method="POST" enctype="multipart/form-data" class="create-challenge-form">
     {% csrf_token %}
-    <br>
-    <label for="nombre">Nombre:</label>
-    <input type="text" name="nombre" id="nombre">
-    <br>
-    <label for="descripcion">Descripcion:</label>
-    <textarea name="descripcion" id="code-editor-description"></textarea>
-    <br>
-    <div class="editores-codigo">
-      <div id="editor1">
-        <label for="tests">Tests:</label>
-        <textarea name="tests" id="code-editor-tests"></textarea>
+    <div class="info-general">
+      <div class="input-piece">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre del reto...">
       </div>
-      <div id="editor2">
-        <label for="template">Template inicial:</label>
-        <textarea name="template" id="code-editor-template"></textarea>
+      <div class="input-piece">
+        <label for="disciplina">Disciplina</label>
+        <input type="text" name="disciplina" id="disciplina" placeholder="Disciplina del reto...">
+      </div>
+      <div class="input-piece">
+        <label for="dificultad">Dificultad</label>
+        <input type="text" name="dificultad" id="dificultad" placeholder="Dificultad...">
+      </div>
+      <div class="input-piece">
+        <label for="descripcion">Descripción</label>
+        <textarea placeholder="Breve descripción..." type="text" name="descripcion" id="descripcion"  maxlength="280"></textarea>
       </div>
     </div>
-    <br>
+    <div class="instrucciones">
+      <label for="instrucciones" style="margin: 1% 1%">Instrucciones</label>
+      <textarea name="instrucciones" id="code-editor-instructions"></textarea>
+    </div>
+    <div class="template">
+      <label for="template" style="margin: 1% 1%">Template</label>
+      <textarea name="template" id="code-editor-template"></textarea>
+    </div>
+    <div class="tests">
+      <label for="tests" style="margin: 1% 1%">Tests</label>
+      <textarea name="tests" id="code-editor-tests"></textarea>
+    </div>
     <button type="submit">Crear reto</button>
   </form>
-  <script src="{% static 'js/create_challenge.js' %}">
+
+
+  <script src="{% static 'js/create_challenge.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/crea_challenge.css' %}">
+  
 {% endblock %}

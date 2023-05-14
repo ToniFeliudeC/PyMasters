@@ -15,5 +15,8 @@
     <p>{{ challenge.description }}</p>
     <button class="btn btn-primary button-reto"><a href="{% url 'reto' challenge.id %}">Solve</a></button>
 </div>
+{% empty %}
+<p style="color: white;">Oops! seems there are not available challenges right now!</p>
 {% endfor %}
+
 {% endblock %}

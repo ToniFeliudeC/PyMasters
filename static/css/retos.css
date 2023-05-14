@@ -36,7 +36,7 @@
 /* Botonaco */
 button {
     color: white;
-    --c:  orange; /* the color*/
+    --c:  #ffa500; /* the color*/
     border-radius: 2%;    
     box-shadow: 0 0 0 .1em inset var(--c); 
     --_g: linear-gradient(var(--c) 0 0) no-repeat;
