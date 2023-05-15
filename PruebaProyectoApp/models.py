@@ -11,6 +11,7 @@ class Challenge(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     difficulty = models.IntegerField(default=1)
+    category = models.TextField(default="")
     is_active = models.BooleanField(default=False)
 
     def __str__(self):

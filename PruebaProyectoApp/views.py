@@ -106,6 +106,7 @@ def crea_challenge(request):
         dificultad = request.POST.get('dificultad')
         tests = request.POST.get('tests')
         template = request.POST.get('template')
+        category = request.POST.get('disciplina')
         created_at = datetime.now()
 
         current_user = request.user
@@ -119,7 +120,8 @@ def crea_challenge(request):
             created_at=created_at,
             creator=current_user,
             difficulty=dificultad,
-            instructions=instrucciones
+            instructions=instrucciones,
+            category=category
             )
         nuevo_registro.save()
         
