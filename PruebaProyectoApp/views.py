@@ -66,7 +66,7 @@ def reto(request, reto_id):
 
         if correct == totalTests:
             # Añadimos un registro a la tabla que relaciona usuarios con retos que han superado.
-            nuevo_registro = UserChallenge(user=current_user, challenge=challenge)
+            nuevo_registro = UserChallenge(user=current_user, challenge=challenge, solution=solucion)
             nuevo_registro.save()
             return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'failed': True, 'totalTests': totalTests, 'correct': correct, 'failedTests': failedTests})
         else:

@@ -65,19 +65,20 @@
 # assertEquals(suma(2,3), 5)
 
 
-code = '''
-def isHappy(n, list=[]):
+# code = '''
+# def isHappy(n, list=[]):
 
-    if n in list: return False
-    if n == 1: return True
+#     if n in list: return False
+#     if n == 1: return True
     
-    alreadyAppeared = list[:]
-    alreadyAppeared.append(n)
-    n = sum([int(x)**2 for x in str(n)])
+#     alreadyAppeared = list[:]
+#     alreadyAppeared.append(n)
+#     n = sum([int(x)**2 for x in str(n)])
     
-    return isHappy(n, alreadyAppeared)
+#     return isHappy(n, alreadyAppeared)
 
-print(isHappy(8))
-'''
+# print(isHappy(8))
+# '''
 
-exec(code)
+# exec(code)
+

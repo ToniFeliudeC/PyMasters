@@ -1,29 +1,36 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
-  {% load static %}
+  {% comment %} Importamos CodeMirror para hacer los inputs más atractivos {% endcomment %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+  <link rel="stylesheet" href="https://codemirror.net/5/theme/dracula.css">
+  <link rel="stylesheet" href="https://codemirror.net/5/theme/darcula.css">
+
+  {% comment %} Highlighting de python {% endcomment %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/dracula.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.js"></script>
+
+  
   <link rel="stylesheet" href="{% static 'css/reto.css' %}">
   <script type="module" src="https://md-block.verou.me/md-block.js"></script>
-  <h1>{{ challenge.title }}</h1>
-  <p>Fecha: {{ challenge.created_at }}</p>
-  <h2>Descripción</h2>
-  <div id="instructions-div">
-    <md-block id="instructions">{{ challenge.instructions }}</md-block>
-  </div>
-  
-  
-
-  <form method="POST">
+  <form method="POST" enctype="multipart/form-data" class="submit-challenge-form">
     {% csrf_token %}
-    <div class="editores-codigo">
-      <div id="editor1">
-        <label for="codigo">Your solution!:</label><br>
-        <textarea name="codigo" id="code-editor-template">{{ challenge.code_template }}</textarea><br>
-      </div>
-      <div id="editor2"> 
-        <label for="logs">Log:</label><br>
-        <textarea name="logs" id="code-editor-logs">
+    <div class="instrucciones">
+      <md-block id="md-instructions">{{ challenge.instructions }}</md-block>
+    </div>
+    <div class="solucion">
+      <label for="solution">Solución</label>
+      <textarea name="codigo" id="code-editor-solution">{{ challenge.code_template }}</textarea>
+    </div>
+    <div class="logs">
+      <label for="solution">Logs</label>
+      <textarea name="logs" id="code-editor-logs">
 
         Total cases: {{ totalTests }} | Passed: {{ correct }} | Failed: {{ failedTests }}
         {% if failed  %}
@@ -31,10 +38,9 @@
           {{ case.0 }} Received: {{ case.1 }} Expected: {{ case.2 }}
         {% endfor %}
         {% endif %}
-        </textarea><br>
-      </div>
+        </textarea>
     </div>
     <button type="submit">Enviar solución</button>
   </form>
-  <script src="{% static 'js/reto.js' %}">
+  <script src="{% static 'js/reto.js' %}"></script>
 {% endblock %}

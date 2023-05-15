@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', retos, name='retos'),
     path('accounts/login/', log_in, name='login'),
+    # path("register", register_request, name="register"),
     path('logout/', log_out, name='logout'),
     path('admin/', admin.site.urls),
     path('retos/', retos, name='retos'),

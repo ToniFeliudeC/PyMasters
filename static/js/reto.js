@@ -4,8 +4,15 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code-editor-logs")
     readOnly: true
   });
 
-var editor = CodeMirror.fromTextArea(document.getElementById("code-editor-template"), {
+var editor2 = CodeMirror.fromTextArea(document.getElementById("code-editor-solution"), {
   mode: "python",
   lineNumbers: true,
   theme: "darcula"
 });
+
+var editor3 = CodeMirror.fromTextArea(document.getElementById("code-editor-instructions"), {
+  mode: "normal",
+  lineNumbers: true,
+  theme: "darcula"
+});
+
