@@ -23,6 +23,7 @@ class UserChallenge(models.Model):
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     date_solved = models.DateTimeField(auto_now_add=True)
     solution = models.TextField(default=None)
+    
 
     class Meta:
         unique_together = ["user", "challenge", "solution"]

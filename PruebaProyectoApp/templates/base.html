@@ -31,11 +31,16 @@
                     {% else %}
                     <li><a href="{% url 'logout' %}"><img src="{% static 'img/exit_to_app_24.png' %}" alt="Log Out">&nbspLOG OUT</a></li>
                     {% endif %}
+                    {% if request.user.is_superuser %}
+                    <li><a href="{% url 'challenges_reviews' %}"><img src="{% static 'img/warning_24.png' %}" alt="Log Out">&nbspCHALLENGE REVIEWS</a></li>
+                    {% endif %}
+                    
                 </div>
                 <hr>
             </div>
+            
         </div>
-        <div class="content">
+        <div class="content">  
           {% block content %}{% endblock %}
         </div>
     </div>

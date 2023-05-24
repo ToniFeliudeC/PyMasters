@@ -103,6 +103,12 @@ def retos(request):
     challenges = [challenge for challenge in Challenge.objects.all() if challenge.is_active]
     return render(request, 'retos.html', {'challenges': challenges})
 
+@login_required
+def challenges_reviews(request):
+    challenges = [challenge for challenge in Challenge.objects.all() if not challenge.is_active]
+    return render(request, 'challenge_reviews.html', {'challenges': challenges})
+
+
 
 def log_out(request):
     logout(request)

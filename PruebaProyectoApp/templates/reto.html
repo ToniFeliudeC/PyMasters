@@ -28,7 +28,11 @@
       <label for="solution">Solución</label>
       <textarea name="codigo" id="code-editor-solution">{{ challenge.code_template }}</textarea>
     </div>
+    {% if totalTests != 0 and failedTests == 0 %}
+    <div class="logs" style="border: 2px solid green;">
+    {% else %}
     <div class="logs">
+    {% endif %}
       <label for="solution">Logs</label>
       <textarea name="logs" id="code-editor-logs">
 

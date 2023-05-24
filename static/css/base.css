@@ -73,7 +73,11 @@ body {
     align-items: flex-start;
     justify-content: space-evenly;
     list-style: none;
-    height: 30vh;  
+    height: 30vh;
+    background-image: url('../img/LOGO1.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .sub-columna .nav li a {
@@ -104,6 +108,7 @@ body {
 
 /* Responsive */
 @media only screen and (max-width: 600px) {
+    
     .container {
         display: flex;
         height: 100%;
