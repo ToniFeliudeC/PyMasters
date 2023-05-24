@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Challenge, UserChallenge
+from .models import Challenge, UserChallenge, UserScore
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 import re
-
 
 
 
@@ -65,9 +64,35 @@ def reto(request, reto_id):
         failedTests = totalTests - correct
 
         if correct == totalTests:
+
+            
             # Añadimos un registro a la tabla que relaciona usuarios con retos que han superado.
-            nuevo_registro = UserChallenge(user=current_user, challenge=challenge, solution=solucion)
-            nuevo_registro.save()
+            user_challenge = UserChallenge(user=current_user, challenge=challenge, solution=solucion)
+            try:
+                # Obtener el objeto UserChallenge asociado al usuario actual si existe
+                user_challenge = UserChallenge.objects.get(user=current_user, challenge=challenge, solution=solucion)
+
+            except UserChallenge.DoesNotExist:
+                user_challenge = UserChallenge.objects.create(user=current_user, challenge=challenge, solution=solucion)
+                user_challenge.save()
+
+            # Añadir score al player.
+            scores = [1,2,3,4,5]
+            score_to_add = scores[challenge.difficulty-1]
+            try:
+                # Obtener el objeto UserScore asociado al usuario actual si existe
+                user_score = UserScore.objects.get(user=current_user)
+
+            except UserScore.DoesNotExist:
+                # Si no existe un registro, puedes crear uno nuevo con el puntaje inicial
+                user_score = UserScore.objects.create(user=current_user, score=score_to_add)
+
+            else:
+                # Sumar el puntaje adicional al puntaje existente
+                user_score.score += score_to_add
+                user_score.save()
+
+            user_challenge.save()
             return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'failed': True, 'totalTests': totalTests, 'correct': correct, 'failedTests': failedTests})
         else:
             return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'failed': True})
