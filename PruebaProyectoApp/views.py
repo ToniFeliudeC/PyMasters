@@ -1,13 +1,63 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Challenge, UserChallenge, UserScore
+from .models import Challenge, UserChallenge, UserScore, User
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 import re
+from .forms import LoginForm, RegisterForm
+from django.contrib import messages
+from django.db.models import Count
+
 
 
 
 # Create your views here.
+
+def home(request):
+    return render(request, 'home.html')
+
+# Auxiliar para renderizar retos completados
+def get_solutions(challenge, user):
+    solutions = UserChallenge.objects.filter(user=user, challenge=challenge)
+    return solutions
+
+
+def user(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    try:
+        user_score = UserScore.objects.get(user=user)
+    except:
+        user_score = None
+
+    score = user_score.score if user_score else 0
+    num_retos = UserChallenge.objects.filter(user=user).distinct('challenge').count()
+    user_challenges = UserChallenge.objects.filter(user=user).distinct('challenge')
+    authored_challenges = Challenge.objects.filter(creator=user)
+    return render(request, 'user_profile.html', {'user': user, 'visitor': request.user, 'score': score, 'num_retos': num_retos, 'authored_challenges': authored_challenges, 'user_challenges': user_challenges})
+
+
+@login_required
+def your_profile(request):
+    return render(request, 'user_profile.html', {'user': request.user})
+
+
+def sign_up(request):
+    if request.method == 'GET':
+        form = RegisterForm()
+        return render(request, 'register.html', { 'form': form})
+    
+    if request.method == 'POST':
+        form = RegisterForm(request.POST) 
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, 'You have singed up successfully.')
+            login(request, user)
+            return redirect('retos')
+        else:
+            return render(request, 'register.html', {'form': form})
+
 
 @login_required
 def reto(request, reto_id):
@@ -18,7 +68,7 @@ def reto(request, reto_id):
     
     def assertEquals(received, expected):
         
-        message = f'Expected {expected} but received {received}' if received != expected else 'Correct!'
+        message = 'Incorrect...' if received != expected else 'Correct!'
         
         cases.append((message, received, expected))
 
@@ -93,15 +143,37 @@ def reto(request, reto_id):
                 user_score.save()
 
             user_challenge.save()
-            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'failed': True, 'totalTests': totalTests, 'correct': correct, 'failedTests': failedTests})
+            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'totalTests': totalTests, 'correct': correct, 'failedTests': failedTests})
         else:
-            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'failed': True})
+            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'totalTests': totalTests, 'correct': correct, 'failedTests': failedTests})
             
     return render(request, 'reto.html', {'challenge': challenge})
 
+
+@login_required
+def reto_info(request, reto_id):
+    challenge = get_object_or_404(Challenge, pk=reto_id)
+
+    if request.method == 'POST':
+        challenge.is_active = True
+        challenge.save()
+        return redirect('retos')
+
+    return render(request, 'reto_info.html', {'challenge': challenge})
+
+
 def retos(request):
-    challenges = [challenge for challenge in Challenge.objects.all() if challenge.is_active]
-    return render(request, 'retos.html', {'challenges': challenges})
+    search_term = request.GET.get('search')
+
+    # Filtrar los retos según el término de búsqueda
+    if search_term:
+        challenges = Challenge.objects.filter(title__icontains=search_term)
+    else:
+        challenges = Challenge.objects.all()
+    
+    active_challenges = [challenge for challenge in challenges if challenge.is_active]
+
+    return render(request, 'retos.html', {'challenges': active_challenges})
 
 @login_required
 def challenges_reviews(request):
@@ -109,10 +181,9 @@ def challenges_reviews(request):
     return render(request, 'challenge_reviews.html', {'challenges': challenges})
 
 
-
 def log_out(request):
     logout(request)
-    return redirect(retos)
+    return redirect('home')
 
 
 def log_in(request):
@@ -123,6 +194,7 @@ def log_in(request):
     
         if user is not None:
             login(request, user)
+            return redirect('retos')
 
     return render(request, 'login.html')
 

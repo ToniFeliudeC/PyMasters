@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+{% comment %} Importamos CodeMirror para hacer los inputs más atractivos {% endcomment %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+<link rel="stylesheet" href="https://codemirror.net/5/theme/dracula.css">
+<link rel="stylesheet" href="https://codemirror.net/5/theme/darcula.css">
+{% comment %} Highlighting de python {% endcomment %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/dracula.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/addon/hint/show-hint.min.js"></script>
+
+<script type="module" src="https://md-block.verou.me/md-block.js"></script>
+
+<link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
+<div class="profile-container">
+    <div class="general">
+        <h1>{{ user.username }}</h1>
+        <h3 class="member-since">Member since: {{ user.date_joined }}</h2>
+        <h3 class="score">Score: {{ score }}</h3>
+        <h3 class="total-completed">Total completed challenges: {{ num_retos }}</h3>
+    </div>
+    <div class="authored-challenges-container">
+        <h1>Authored Challenges</h1>
+        {% for challenge in authored_challenges %}
+        <div class="challenge-box">
+            <a href="#"><h1>{{ challenge.title }}</h1></a>
+            <div class="challenge-info">
+                <div class="challenge-date">{{ challenge.created_at }}</div>
+                <div>&nbsp|&nbsp</div>
+                <div class="challenge-category">{{ challenge.category }}</div>
+            </div>
+            <h4>Dificultad: {{ challenge.difficulty }}</h4>
+            <p>{{ challenge.description }}</p>
+            <button class="btn btn-primary button-reto"><a href="{% url 'reto' challenge.id %}">Solve</a></button>
+        </div>
+        {% empty %}
+        <p style="color: white;">No authored challenges for this user.</p>
+        {% endfor %}
+    </div>
+    <div class="completed-challenges">
+        <h1>Completed Challenges</h1>
+        {% for user_challenge in user_challenges %}
+            <h3>{{ user_challenge.challenge.title }}</h3>
+                <div class="code-block-containers">
+                    <md-block class="code-block">
+                        ```
+                        {{ user_challenge.solution }}
+                        ```
+                    </md-block>
+                </div>
+        {% empty %}
+        <p style="color: white;">No authored challenges for this user.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="{% static 'js/user_profile.js' %}"></script>
+
+{% endblock %}

@@ -15,11 +15,11 @@
     <div class="container">
         <div class="menu-columna">
             <div class="sub-columna">
-                <h1><span style="color:orange">Py</span>Masters</h1>
+                <h1 id="logo-titulo"><span style="color:orange">Py</span>Masters <img src="{% static 'img/logo1_128.png' %}" alt="logo"></h1>
                 <p>Python Elite</p>
                 <hr>
                 <div class="nav">
-                    <li><a href="{% url 'login' %}"><img src="{% static 'img/home_24.png' %}" alt="Home">&nbspHOME </a></li>
+                    <li><a href="{% url 'home' %}"><img src="{% static 'img/home_24.png' %}" alt="Home">&nbspHOME </a></li>
                     <li><a href="{% url 'retos' %}"><img src="{% static 'img/code_24.png' %}" alt="Challenges">&nbspCHALLENGES </a></li>
                     <li><a href="{% url 'login' %}"><img src="{% static 'img/group_24.png' %}" alt="Users">&nbspUSERS</a></li>
                     <li><a href="{% url 'crea_challenges' %}"><img src="{% static 'img/add_24.png' %}" alt="Submit">&nbspSUBMIT</a></li>
@@ -34,9 +34,9 @@
                     {% if request.user.is_superuser %}
                     <li><a href="{% url 'challenges_reviews' %}"><img src="{% static 'img/warning_24.png' %}" alt="Log Out">&nbspCHALLENGE REVIEWS</a></li>
                     {% endif %}
-                    
                 </div>
                 <hr>
+
             </div>
             
         </div>

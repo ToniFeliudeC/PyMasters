@@ -3,6 +3,10 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/retos.css' %}">
+<form method="GET" action="{% url 'retos' %}">
+	<input type="text" name="search" placeholder="Enter challenge name here...">
+    <button>Search</button>
+</form>
 {% for challenge in challenges %}
 <div class="challenge-box">
     <a href="#"><h1>{{ challenge.title }}</h1></a>
@@ -16,7 +20,7 @@
     <button class="btn btn-primary button-reto"><a href="{% url 'reto' challenge.id %}">Solve</a></button>
 </div>
 {% empty %}
-<p style="color: white;">Oops! seems there are not available challenges right now!</p>
+<p style="color: white;">No challenges were found.</p>
 {% endfor %}
 
 {% endblock %}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyMasters</title>
+    <link href="https://fonts.cdnfonts.com/css/blue" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <h1><span style="color:orange">Py</span>Masters</h1>
+            {% if request.user.is_anonymous %}
+            <li><a href="{% url 'register' %}"><img src="{% static 'img/person_add_24.png' %}" alt="Register">&nbspREGISTER</a></li>
+            <li><a href="{% url 'login' %}"><img src="{% static 'img/vpn_key_24.png' %}" alt="Log In">&nbspLOGIN</a></li>
+            {% else %}
+            <li><a href="{% url 'retos' %}"><img src="{% static 'img/code_24.png' %}" alt="Challenges">&nbspCHALLENGES </a></li>
+            <li><a href="{% url 'login' %}"><img src="{% static 'img/group_24.png' %}" alt="Users">&nbspUSERS</a></li>
+            <li><a href="{% url 'logout' %}"><img src="{% static 'img/exit_to_app_24.png' %}" alt="Log Out">&nbspLOG OUT</a></li>
+            {% endif %}
+        </div>
+        <div class="landing-title">
+            <h1><span style="color:orange">Py</span>thon Mastery through challenges</h1>
+            <button><a href="{% url 'register' %}">Get Started!</a></button>
+        </div>
+        <div class="improve-skills">
+            <div id="skills-title-text">
+                <h1>Improve your overall coding skills</h1>
+                <p>Challenge yourself on small coding exercises mainly focused on improving your Python and general programming skills. Each challenge is crafted by the community to help you strengthen 
+                    different coding techniques.</p>
+            </div>
+            <div id="skills-image">
+                <img src="{% static 'img/challenge-example.png' %}">
+            </div>     
+        </div>
+        <div class="get-instant-feedback">
+            <div id="instant-title-text">
+                <h1>Get instant feedback</h1>
+                <p>Solve challenges with your coding style right in the browser and use the tests cases that the 
+                    creator of the challenge defined to check your progress.</p>
+            </div>
+            <div id="instant-img">
+                <img src="{% static 'img/logs-example.png' %}">
+            </div>
+        </div>
+        <div class="earn-score">
+            <div id="instant-title-text">
+                <h1>Earn score to climb rank!</h1>
+                <p>Improve your mastery and climb the ladder to become the ultimate PyMaster!</p>
+            </div>
+            <div id="instant-img">
+                <img src="{% static 'img/logs-example.png' %}">
+            </div>
+        </div>
+        <div class="engaged-community">
+            <div class="mini-boxes">
+                <h1>1k+</h1>
+                <p>Community members added every month</p>
+            </div>
+            <div class="mini-boxes">
+                <h1>200+</h1>
+                <p>Challenges completed every month</p>
+            </div>
+            <div class="mini-boxes">
+                <h1>10k+</h1>
+                <p>Challenges created by our community</p>
+            </div>
+        </div>
+        <div class="compare-solutions">
+            <div id="instant-title-text">
+                <h1>Compare your solution to others and learn new techniques!</h1>
+                <p>Compare your solution with others after each challenge for greater understanding.
+                     Discuss challenges, best practices, and innovative techniques with the community. 
+                     Have your mind blown by how different other solutions can be from your own</p>
+            </div>
+            <div id="instant-img">
+                <img src="{% static 'img/compare-solutions-example.png' %}">
+            </div>
+        </div>
+        <div class="create-challenge">
+            <div id="instant-title-text">
+                <h1>Create your own challenges</h1>
+                <p>Author challenges that focus on your interests and train specific skill sets. 
+                    Challenge the community with your insight and code understanding. 
+                    Create everything from common developer interview questions to challenges 
+                    that push the limits of your creativity.</p>
+            </div>
+            <div id="instant-img">
+                <img src="{% static 'img/create-chall-example.png' %}">
+            </div>
+        </div>
+        <div class="footer">
+            <div class="mini-box">
+                <h1>ToniFeliudeC</h1>
+                <a href="https://github.com/ToniFeliudeC"><i class="fa fa-github"></i></a>
+            </div>
+            <div class="mini-box">
+                <h1>Abril frongia</h1>
+                <a href="https://github.com/AbrilF"><i class="fa fa-github"></i></a>
+            </div>            
+        </div>
+    </div>
+    <script src="{% static 'js/home.js' %}"></script>
+</body>
+</html>

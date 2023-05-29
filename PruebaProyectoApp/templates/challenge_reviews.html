@@ -33,6 +33,7 @@
           <td>{{ challenge.category }}</td>
           <td>{{ challenge.difficulty }}</td>
           <td>{{ challenge.created_at }}</td>
+          <td><button class="btn btn-primary button-reto"><a href="{% url 'reto_info' challenge.id %}">CHECK</a></button></td>
         </tr>
         {% endfor %}
     </table>
