@@ -80,6 +80,9 @@ def sign_up(request):
             return render(request, 'register.html', {'form': form})
 
 
+def not_found(request, url):
+    return render(request, 'not_found.html')
+
 @login_required
 def reto(request, reto_id):
 
@@ -121,12 +124,13 @@ def reto(request, reto_id):
         print(script)
         print(normalized_script)
 
+        excepcion = None
         
         # Ejecutar el script con los tests
         try:
             exec(normalized_script, globals(), locals())
-        except SyntaxError as e:
-            print(e)
+        except Exception as e:
+            excepcion = repr(e)
 
         totalTests = len(cases)
 
@@ -136,20 +140,25 @@ def reto(request, reto_id):
 
         if correct == totalTests:
 
+            score_to_add = 0
             
-            # Añadimos un registro a la tabla que relaciona usuarios con retos que han superado.
-            user_challenge = UserChallenge(user=current_user, challenge=challenge, solution=solucion)
             try:
                 # Obtener el objeto UserChallenge asociado al usuario actual si existe
                 user_challenge = UserChallenge.objects.get(user=current_user, challenge=challenge, solution=solucion)
 
             except UserChallenge.DoesNotExist:
+                already_beaten = UserChallenge.objects.filter(user=current_user, challenge=challenge).exists()
                 user_challenge = UserChallenge.objects.create(user=current_user, challenge=challenge, solution=solucion)
-                user_challenge.save()
+                # Añadir score al player.
+                
 
-            # Añadir score al player.
-            scores = [1,2,3,4,5]
-            score_to_add = scores[challenge.difficulty-1]
+                if not already_beaten:
+                    scores = [1,2,3,4,5]
+                    score_to_add = scores[challenge.difficulty-1]
+
+                user_challenge.save()
+            
+        
             try:
                 # Obtener el objeto UserScore asociado al usuario actual si existe
                 user_score = UserScore.objects.get(user=current_user)
@@ -158,15 +167,15 @@ def reto(request, reto_id):
                 # Si no existe un registro, puedes crear uno nuevo con el puntaje inicial
                 user_score = UserScore.objects.create(user=current_user, score=score_to_add)
 
-            else:
-                # Sumar el puntaje adicional al puntaje existente
-                user_score.score += score_to_add
-                user_score.save()
+            # Sumar el puntaje adicional al puntaje existente
+            user_score.score += score_to_add
+            user_score.save()
 
             user_challenge.save()
-            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'totalTests': totalTests, 'correct': correct, 'failedTests': failedTests})
+            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'totalTests': totalTests, 'correct': correct, 'failedTests': failedTests, 'excepcion': excepcion})
         else:
-            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'totalTests': totalTests, 'correct': correct, 'failedTests': failedTests})
+            print(excepcion)
+            return render(request, 'reto.html', {'challenge': challenge, 'cases': cases, 'totalTests': totalTests, 'correct': correct, 'failedTests': failedTests, 'excepcion': excepcion})
             
     return render(request, 'reto.html', {'challenge': challenge})
 

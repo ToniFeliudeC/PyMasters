@@ -35,12 +35,15 @@
     {% endif %}
       <label for="solution">Logs</label>
       <textarea name="logs" id="code-editor-logs">
-
+        {% if excepcion %}
+        {{ excepcion }}
+        {% else %}
         Total cases: {{ totalTests }} | Passed: {{ correct }} | Failed: {{ failedTests }}
         {% for case in cases %}
           {{ case.0 }} Received: {{ case.1 }} Expected: {{ case.2 }}
         {% endfor %}
-        </textarea>
+        {% endif %}
+      </textarea>
     </div>
     <button type="submit" class="send-button">Enviar solución</button>
     <a class="comments-button" href="{% url 'challenge_comments' reto_id=challenge.id %}">Comentarios</a>
