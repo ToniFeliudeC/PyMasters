@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+  <link rel="stylesheet" href="{% static 'css/users.css' %}">
+
+    <h1 class="users-title">USERS</h1>
+
+    <table class="styled-table">
+        <tr>
+            <th>User</th>
+            <th>Score</th>
+        </tr>
+        {% for user in users_scores %}
+          <tr>
+            <td><a href="{% url 'user' user.0.id %}">{{ user.0.username }}</a></td>
+            <td><a href="{% url 'user' user.0.id %}">{{ user.1 }}</a></td>
+          </tr> 
+        {% endfor %}
+    </table>
+
+    <script src="{% static 'js/challenge_reviews.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/challenge_reviews.css' %}">
+  
+{% endblock %}

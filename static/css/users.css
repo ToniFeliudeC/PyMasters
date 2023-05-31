@@ -1,0 +1,15 @@
+.users-title {
+    color: WHITE;
+    font-size: 3em;
+}
+
+td a {
+    text-decoration: none;
+    color: white;
+    font-size: 2em;
+    font-family: 'Blue', sans-serif;
+}
+
+td a:hover {
+    color: orange;
+}

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from PruebaProyectoApp.views import retos, crea_challenge, log_in, reto, log_out, challenges_reviews, sign_up, reto_info, home, user
+from PruebaProyectoApp.views import retos, crea_challenge, log_in, reto, log_out, challenges_reviews, sign_up, reto_info, home, user, challenge_comments, users
 
 # Para los static
 from django.conf import settings
@@ -30,11 +30,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('retos/', retos, name='retos'),
     path('retos/<int:reto_id>/', reto, name='reto'),
+    path('retos/<int:reto_id>/comments', challenge_comments, name='challenge_comments'),
+    path('users/', users, name='users'),
     path('users/<int:user_id>/', user, name='user'),
     path('challenge_info/<int:reto_id>/', reto_info, name='reto_info'),
     path('crea_challenges/', crea_challenge, name='crea_challenges'),
     path('challenge_reviews/', challenges_reviews, name='challenges_reviews')
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

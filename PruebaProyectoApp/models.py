@@ -43,7 +43,7 @@ class UserScore(models.Model):
 class Comment(models.Model):
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.TextField()
+    body = models.TextField(default='Empty comment')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -110,6 +110,21 @@ input, textarea, select {
     border: 2px solid orange;
 }
 
+.create-button {
+    background-color: black;
+    color: white;
+    border: 2px solid orange;
+    font-family: 'Blue', sans-serif;
+    font-size: 3em;
+}
+
+.create-button:hover {
+    background-color: rgb(61, 61, 61);
+    margin: 1%;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
 /* Botón para confirmar el envío de un nuevo reto */
 button {
     grid-column-start: 1;

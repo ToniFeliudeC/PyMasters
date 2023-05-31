@@ -47,15 +47,17 @@
     </div>
     <div class="completed-challenges">
         <h1>Completed Challenges</h1>
-        {% for user_challenge in user_challenges %}
-            <h3>{{ user_challenge.challenge.title }}</h3>
-                <div class="code-block-containers">
-                    <md-block class="code-block">
-                        ```
-                        {{ user_challenge.solution }}
-                        ```
-                    </md-block>
-                </div>
+        {% for challenge, solutions in challenges_dict.items %}
+            <h3>{{ challenge.title }}</h3>
+                {% for solution in solutions  %}
+                    <div class="code-block-containers">
+                        <md-block class="code-block">
+                            ```
+                            {{ solution }}
+                            ```
+                        </md-block>
+                    </div>
+                {% endfor %}
         {% empty %}
         <p style="color: white;">No authored challenges for this user.</p>
         {% endfor %}

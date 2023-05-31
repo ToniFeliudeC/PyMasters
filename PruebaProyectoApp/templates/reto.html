@@ -29,7 +29,7 @@
       <textarea name="codigo" id="code-editor-solution">{{ challenge.code_template }}</textarea>
     </div>
     {% if totalTests != 0 and failedTests == 0 %}
-    <div class="logs" style="border: 2px solid green;">
+    <div class="logs" style="border: 5px solid green;">
     {% else %}
     <div class="logs">
     {% endif %}
@@ -42,7 +42,8 @@
         {% endfor %}
         </textarea>
     </div>
-    <button type="submit">Enviar solución</button>
+    <button type="submit" class="send-button">Enviar solución</button>
+    <a class="comments-button" href="{% url 'challenge_comments' reto_id=challenge.id %}">Comentarios</a>
   </form>
   <script src="{% static 'js/reto.js' %}"></script>
 {% endblock %}

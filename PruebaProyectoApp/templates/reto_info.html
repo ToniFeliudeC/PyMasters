@@ -22,11 +22,11 @@
     {% csrf_token %}
     <div class="info-general">
       <div class="input-piece">
-        <label for="nombre">Nombre</label>
+        <label for="nombre">Name</label>
         <input readonly type="text" name="nombre" id="nombre" value="{{ challenge.title }}" placeholder="Nombre del reto...">
       </div>
       <div class="input-piece">
-        <label for="disciplina">Disciplina</label>
+        <label for="disciplina">Discipline</label>
         <select disabled value="{{ challenge.category }}" name="disciplina">
           <option value="FUNDAMENTALS" {% if challenge.category == 'FUNDAMENTALS' %} selected='selected' {% endif %}>Easy</option>
           <option value="ALGORITHMS" {% if challenge.category == 'ALGORITHMS' %} selected='selected' {% endif %}>Algorithms</option>
@@ -36,7 +36,7 @@
         </select>
       </div>
       <div class="input-piece">
-        <label for="dificultad">Dificultad</label>
+        <label for="dificultad">Difficulty</label>
         <select disabled name="dificultad">
           <option value="1" {% if challenge.difficulty == 1 %} selected='selected' {% endif %}>Easy</option>
           <option value="2" {% if challenge.difficulty == 2 %} selected='selected' {% endif %}>Normal</option>
@@ -46,12 +46,12 @@
         </select> 
       </div>
       <div class="input-piece">
-        <label for="descripcion">Descripción</label>
+        <label for="descripcion">Description</label>
         <textarea readonly placeholder="Breve descripción..." type="text" name="descripcion" id="descripcion"  maxlength="280">{{ challenge.description }}</textarea>
       </div>
     </div>
     <div class="instrucciones">
-      <label for="instrucciones" style="margin: 1% 1%">Instrucciones</label>
+      <label for="instrucciones" style="margin: 1% 1%">Instructions</label>
       <textarea name="instrucciones" id="code-editor-instructions">{{ challenge.instructions }}</textarea>
     </div>
     <div class="template">
@@ -62,7 +62,8 @@
       <label for="tests" style="margin: 1% 1%">Tests</label>
       <textarea name="tests" id="code-editor-tests">{{ challenge.test_cases }}</textarea>
     </div>
-    <button class="approve-button" type="submit">APPROVE</button>
+    <button class="approve-button" name="approve" type="submit">APPROVE</button>
+    <button class="decline-button" name="reject" type="submit">DECLINE</button>
   </form>
 
 

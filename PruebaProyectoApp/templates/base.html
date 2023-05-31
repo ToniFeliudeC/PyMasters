@@ -21,14 +21,13 @@
                 <div class="nav">
                     <li><a href="{% url 'home' %}"><img src="{% static 'img/home_24.png' %}" alt="Home">&nbspHOME </a></li>
                     <li><a href="{% url 'retos' %}"><img src="{% static 'img/code_24.png' %}" alt="Challenges">&nbspCHALLENGES </a></li>
-                    <li><a href="{% url 'login' %}"><img src="{% static 'img/group_24.png' %}" alt="Users">&nbspUSERS</a></li>
+                    <li><a href="{% url 'users' %}"><img src="{% static 'img/group_24.png' %}" alt="Users">&nbspUSERS</a></li>
                     <li><a href="{% url 'crea_challenges' %}"><img src="{% static 'img/add_24.png' %}" alt="Submit">&nbspSUBMIT</a></li>
                     {% if request.user.is_anonymous %}
-                    <li><a href="{% url 'login' %}"><img src="{% static 'img/person_add_24.png' %}" alt="Register">&nbspREGISTER</a></li>
-                    {% endif %}
-                    {% if request.user.is_anonymous %}
+                    <li><a href="{% url 'register' %}"><img src="{% static 'img/person_add_24.png' %}" alt="Register">&nbspREGISTER</a></li>
                     <li><a href="{% url 'login' %}"><img src="{% static 'img/vpn_key_24.png' %}" alt="Log In">&nbspLOGIN</a></li>
                     {% else %}
+                    <li><a href="{% url 'user' request.user.id %}"><img src="{% static 'img/show_chart_24.png' %}" alt="Profile">&nbspPROFILE</a></li>
                     <li><a href="{% url 'logout' %}"><img src="{% static 'img/exit_to_app_24.png' %}" alt="Log Out">&nbspLOG OUT</a></li>
                     {% endif %}
                     {% if request.user.is_superuser %}

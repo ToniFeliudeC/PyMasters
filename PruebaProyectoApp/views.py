@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Challenge, UserChallenge, UserScore, User
+from .models import Challenge, UserChallenge, UserScore, User, Comment, Response
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 import re
@@ -16,10 +16,23 @@ from django.db.models import Count
 def home(request):
     return render(request, 'home.html')
 
-# Auxiliar para renderizar retos completados
-def get_solutions(challenge, user):
-    solutions = UserChallenge.objects.filter(user=user, challenge=challenge)
-    return solutions
+
+def users(request):
+    users = [user for user in User.objects.all()]
+    # users_scores = [(user, UserScore.objects.get(user=user).score) for user in users]
+
+    users_scores = []
+    for user in users:
+        try:
+            score = UserScore.objects.get(user=user).score
+        except UserScore.DoesNotExist:
+            # El objeto UserScore no existe, realizar acciones adicionales o manejar el caso de manera adecuada
+            # ...
+            score = 0  # Otra asignación o valor predeterminado en caso necesario
+        users_scores.append((user, score))
+    users_scores = sorted(users_scores, key=lambda x: x[1], reverse=True)
+            
+    return render(request, 'users.html', {'users_scores': users_scores})
 
 
 def user(request, user_id):
@@ -32,8 +45,16 @@ def user(request, user_id):
     score = user_score.score if user_score else 0
     num_retos = UserChallenge.objects.filter(user=user).distinct('challenge').count()
     user_challenges = UserChallenge.objects.filter(user=user).distinct('challenge')
+    challenges = [userchallenge.challenge for userchallenge in user_challenges]
+    challenges_dict = {}
+    
+    for challenge in challenges:
+        user_challenges_all = UserChallenge.objects.filter(user=user, challenge=challenge)
+        challenges_dict[challenge] = [user_challenge.solution for user_challenge in user_challenges_all]
+    
+    print(challenges_dict)
     authored_challenges = Challenge.objects.filter(creator=user)
-    return render(request, 'user_profile.html', {'user': user, 'visitor': request.user, 'score': score, 'num_retos': num_retos, 'authored_challenges': authored_challenges, 'user_challenges': user_challenges})
+    return render(request, 'user_profile.html', {'user': user, 'visitor': request.user, 'score': score, 'num_retos': num_retos, 'authored_challenges': authored_challenges, 'challenges_dict': challenges_dict})
 
 
 @login_required
@@ -151,13 +172,40 @@ def reto(request, reto_id):
 
 
 @login_required
+def challenge_comments(request, reto_id):
+
+    challenge = get_object_or_404(Challenge, pk=reto_id)
+
+    if request.method == 'POST':
+        comment_body = request.POST.get('comment_body')
+
+        if comment_body != '':
+            current_user = request.user
+            print(comment_body)
+
+            # Crear el comentario
+            nuevo_registro = Comment(challenge=challenge, user=current_user, body=comment_body)
+            nuevo_registro.save()
+            
+
+            # Redirigir nuevamente al reto para evitar el reenvío del formulario
+        return redirect('challenge_comments', reto_id=reto_id)
+
+    return render(request, 'challenge_comments.html', {'challenge': challenge})
+
+
+@login_required
 def reto_info(request, reto_id):
     challenge = get_object_or_404(Challenge, pk=reto_id)
 
     if request.method == 'POST':
-        challenge.is_active = True
-        challenge.save()
-        return redirect('retos')
+        if 'approve' in request.POST:
+            challenge.is_active = True
+            challenge.save()
+            return redirect('challenges_reviews')
+        elif 'reject' in request.POST:
+            challenge.delete()
+            return redirect('challenges_reviews')
 
     return render(request, 'reto_info.html', {'challenge': challenge})
 

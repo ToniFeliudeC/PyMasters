@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/challenge_comments.css' %}">
+    <h1>{{ challenge.title }}</h1>
+    <form method="POST" enctype="multipart/form-data" class="add-comment-form">
+        {% csrf_token %}
+        <textarea name="comment_body" placeholder="Type your comment here..."></textarea>
+        <br>
+        <input class="boton-send" type="submit" name="submit" value="Send">
+    </form>
+    {% for comment in challenge.comments.all %}
+        <div class="comment">
+            <h3 class="comment-user-name"><a style="text-decoration: none; color: white;" href="{% url 'user' user.id %}">{{ comment.user }}</a></h3>
+            <h5>{{ comment.created_at }}</h5>
+            <div class="comment-body-container">
+                <p>{{ comment.body }}</p>
+            </div>  
+        </div>
+    {% empty %}
+        <p style="color: white;">No comments available for this challenge yet!</p>
+    {% endfor %}
+    <script src="{% static 'js/challenge_comments.js' %}"></script>
+{% endblock %}

@@ -5,7 +5,7 @@
     grid-template-columns: 5fr 5fr;
     grid-column-gap: 2%;
     grid-row-gap: 2%;
-    grid-template-rows: 5fr 3fr 1fr;
+    grid-template-rows: 5fr 3fr 1fr 1fr;
     height: 100%;
     width: 70%;
 }
@@ -119,9 +119,29 @@ input, textarea, select {
 }
 
 .approve-button:hover {
-    background-color: rgb(61, 61, 61);
+    background-color: green;
     margin: 1%;
     transition: 0.3s;
+    cursor: pointer;
+}
+
+.decline-button {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5; 
+    background-color: black;
+    color: white;
+    border: 2px solid orange;
+    font-family: 'Blue', sans-serif;
+    font-size: 3em;
+}
+
+.decline-button:hover {
+    background-color: red;
+    margin: 1%;
+    transition: 0.3s;
+    cursor: pointer;
 }
 
 /* Botón para confirmar el envío de un nuevo reto */
