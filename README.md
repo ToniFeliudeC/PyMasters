@@ -35,6 +35,7 @@
   - [Vista challenge_comments](#vista-challenge_comments)
   - [Vista reto_info](#vista-reto_info)
 - [Templates de PyMasters](#plantillas-templates-de-pymasters)
+- [Instalación de dependencias](#instalación-dependencias)
 - [Conclusion](#conclusión)
 - [Bibliografia](#bibliografía)
 
@@ -323,7 +324,6 @@ un mensaje de error.
 
 ## Plantillas (Templates) de PyMasters
 ---
-
 ### Wireframes orientativos
 * Home
 ![Wireframe del Home](readme_imgs/home-wireframe.png)
@@ -376,6 +376,11 @@ El template retos.html muestra una lista de desafíos disponibles filtrables por
 El template crea_challenge.html muestra el formulario para crear un nuevo desafío.
 ![Formulario para crear un desafío](readme_imgs/submit-challenge-template.png)
 ![Formulario para crear un desafío rellenado](readme_imgs/submit-challenge-filled-template.png)
+
+## Instalación Dependencias
+Simplemente habrá que ejecutar este comando en la raíz del proyecto.
+
+```pip install -r requirements.txt```
 
 ## Conclusión
 ---
