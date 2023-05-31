@@ -3,13 +3,41 @@
 ## Práctica y entretenimiento creando, resolviendo y comparando ejercicios lógicos de programación en Python.
 
 ![logo](static/img/logo1_128.png)
-
 ---
-
-## Introducción
----
+## Table of Contents
+- [Introducción](#introducción)
+  - [Datos](#datos)
+- [Detalle del proyecto](#detalle-del-proyecto)
+- [Hitos de PyMasters](#hitos-de-pymasters)
+- [Hitos personales](#hitos-personales)
+- [Tecnologías](#tecnologías)
+  - [Django](#django)
+  - [Html](#html)
+  - [CSS](#css)
+  - [JS](#js)
+  - [CodeMirror](#codemirror)
+- [Arquitectura del Proyecto](#arquitectura-del-proyecto)
+  - [Modelo Vista Controlador (MVC)](#modelo-vista-controlador-mvc)
+  - [Modelo Template View (MTV)](#modelo-template-view-mtv)
+- [Modelos (Models) de PyMasters](#modelos-models-de-pymasters)
+  - [Modelo Challenge](#modelo-challenge)
+  - [Modelo UserChallenge](#modelo-userchallenge)
+  - [Modelo UserScore](#modelo-userscore)
+  - [Modelo Comment](#modelo-comment)
+- [Vistas (Views) de PyMasters](#vistas-views-de-pymasters)
+  - [Vista home](#vista-home)
+  - [Vista users](#vista-users)
+  - [Vista user](#vista-user)
+  - [Vista sign_up](#vista-sign_up)
+  - [Vista not_found](#vista-not_found)
+  - [Vista reto](#vista-reto)
+  - [Vista challenge_comments](#vista-challenge_comments)
+  - [Vista reto_info](#vista-reto_info)
+- [Conclusion](#conclusión)
+- [Bibliografia](#bibliografía)
 
 ### Datos
+---
 
 > Nombre del proyecto: PyMasters
 
@@ -88,6 +116,20 @@ al ofrecer un entorno de edición de código sofisticado con resaltado de sintax
 código, autocompletado y muchas otras características útiles. Ha mejorado la experiencia de
 los usuarios al interactuar con el código en nuestras vistas de desafío y permitido una
 programación más eficiente y cómoda.
+
+## Gestión de tiempo
+
+| Actividad                | Duración |
+|--------------------------|----------|
+| Introducción Django (Píldoras informáticas)         | 20h   |
+| Desarrollar backend      | 15h  |
+| Diseñar interfaz         | 5h  |
+| Desarrollar frontend     | 20h  |
+| Pruebas y depuración     | 2h  |
+| Documentación y entrega  | 15h   |
+|                          | Total |
+|                          | 77h |
+
 
 
 ## Arquitectura del Proyecto
@@ -276,6 +318,17 @@ un mensaje de error.
 
 ## Plantillas (Templates) de PyMasters
 ---
+
+### Wireframes orientativos
+* Home
+![Wireframe del Home](readme_imgs/home-wireframe.png)
+
+* Reto
+![Wirefram del template de 1 challenge en específico.](readme_imgs/challenge-wireframe.png)
+
+* Lista de retos
+![Wirefram del template de 1 challenge en específico.](readme_imgs/challenges-wireframe.png)
+
 ### Template home.html
 El template home.html es la página principal del sitio web. Muestra información general y enlaces a otras secciones del sitio
 ![Página principal](readme_imgs/landing-page-1.png)
@@ -302,7 +355,7 @@ El template challenge_comments.html muestra los comentarios asociados a un desaf
 
 ### Template challenges_reviews.html
 El template challenges_reviews.html muestra una lista de retos (si existen) cuyo valor
-del atributo is_active, sea falso, por lo tanto estén pendientes de confirmar.
+del atributo is_active sea falso, que por lo tanto estén pendientes de confirmar.
 ![Desafíos no aprobados](readme_imgs/challenges-reviews-template.png)
 
 ### Template reto_info.html
@@ -318,3 +371,36 @@ El template retos.html muestra una lista de desafíos disponibles filtrables por
 El template crea_challenge.html muestra el formulario para crear un nuevo desafío.
 ![Formulario para crear un desafío](readme_imgs/submit-challenge-template.png)
 ![Formulario para crear un desafío rellenado](readme_imgs/submit-challenge-filled-template.png)
+
+## Conclusión
+---
+Ha sido un proyecto muy emocionante y del que se ha aprendido mucho sobre el desarrollo de aplicaciones web.
+Han surgido muchos problemas por el camino y encontrar la solución no siempre ha sido tan fácil, este proyecto
+me ha dado una perspectiva más realista de lo que es tratar con proyectos medianamente grandes.
+
+Sin lugar a duda lo que más ha costado mejorar es la seguridad de la ejecución del código usuario en el servidor
+a la hora de comprobar si su solución supera los tests y es ahí dónde más potencial de mejora veo si
+continuara con este proyecto después de la entrega final.
+
+Inicialmente, PyMasters, a parte de ser una aplicación web que imitase el comportamiento de webs como
+CodeWars o LeetCode, también iba a ofrecer un sistema de duelos contrareloj en el que 2 usuarios se
+desafíaban en tiempo real por ser el primero en superar todos los tests de un determinado reto. Sin embargo,
+como se dijo, iba a ser en caso de que sobrase tiempo, y desde luego no ha sido el caso, lo cual nos lleva
+al último punto.
+
+Una de las cosas que más me ha enseñado este proyecto, es a no subestimar el tiempo de desarrollo de una
+aplicación, especialmente cuando estás aprendiendo una nueva tecnología desde 0 para desarrollarla.
+
+En definitiva PyMasters es un proyecto del que se ha aprendido mucho, queda mucho por aprender
+y se ha disfrutado mucho su desarrollo. La lista de funcionalidades que me hubiera gustado
+implementar y no se ha podido por falta de tiempo es inmensa y estoy seguro
+de que algún día, o lo retomaré o lo comenzaré desde 0, teniendo ya mucha mejor
+perspectiva para una mejor planificación inicial.
+
+## Bibliografía
+---
+- [CHAT-GPT](https://openai.com/): Modelo de lenguaje desarrollado por OpenAI. 
+- [Youtube](https://www.youtube.com/): Plataforma de video en línea.
+- [StackOverFlow](https://stackoverflow.com/): Comunidad en línea para programadores.
+- [Documentación ofical de Django](https://docs.djangoproject.com/): Django es un framework web de Python.
+- [Sitio web](https://codemirror.net/): CodeMirror es un editor de texto en el navegador.
