@@ -1,6 +1,6 @@
 # PyMasters
 
-## Práctica y entretenimiento creando, resolviendo y comparando ejercicios lógicos de programación en Python.
+## Práctica y entretenimiento: creando, resolviendo y comparando ejercicios lógicos de programación en Python.
 
 ![logo](static/img/logo1_128.png)
 ---
