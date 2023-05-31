@@ -4,7 +4,7 @@
 
 ![logo](static/img/logo1_128.png)
 ---
-## Table of Contents
+## Índice
 - [Introducción](#introducción)
   - [Datos](#datos)
 - [Detalle del proyecto](#detalle-del-proyecto)
@@ -12,6 +12,7 @@
 - [Hitos personales](#hitos-personales)
 - [Tecnologías](#tecnologías)
   - [Django](#django)
+  - [PostgreSQL](#postgresql)
   - [Html](#html)
   - [CSS](#css)
   - [JS](#js)
@@ -33,12 +34,12 @@
   - [Vista reto](#vista-reto)
   - [Vista challenge_comments](#vista-challenge_comments)
   - [Vista reto_info](#vista-reto_info)
+- [Templates de PyMasters](#plantillas-templates-de-pymasters)
 - [Conclusion](#conclusión)
 - [Bibliografia](#bibliografía)
 
-### Datos
+### Información alumnos
 ---
-
 > Nombre del proyecto: PyMasters
 
 > Alumnos: Antonio Feliu de Cabrera Salas y Abril Frongia
@@ -87,6 +88,10 @@ Hace uso de la estructura Modelo Vista Plantilla [MTV (Model View Template)]. Es
 permite tener muy bien distinguido todo el proceso de manejo de datos y lógica de la presentación,
 lo cual permite una gran escalabilidad a largo plazo. Más adelante entraremos más en dellate de cómo
 funciona el MTV y lo compararemos con el popular MVC.
+
+### PostgreSQL
+* Es una base de datos relacional de código abierto que hemos utilizado para vincularla
+con el ORM de Django para almacenar los datos de nuestra aplicación. 
 
 ### Html
 * HTML (HyperText Markup Language) es un lenguaje de marcado utilizado para crear la estructura
